@@ -4,10 +4,13 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SearchBar
@@ -16,12 +19,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.minichallengesmaytwentyfive.ui.theme.MiniChallengesMayTwentyFiveTheme
+import java.nio.file.WatchEvent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -48,6 +53,8 @@ fun SearchableStudyList() {
                             },
                             expanded = false,
                             onExpandedChange = {  },
+                            modifier = Modifier
+                                .height(48.dp),
                             placeholder = { Text("Search") }
                         )
                     },
@@ -87,10 +94,44 @@ fun SearchableStudyList() {
     }
 }
 
+@Composable
+fun SearchableStudyItem() {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .shadow(
+                elevation = 20.dp,
+                shape = RoundedCornerShape(12.dp),
+                ambientColor = Color(0x0813182C),
+                spotColor = Color(0x0813182C)
+            )
+            .background(Color.White, shape = RoundedCornerShape(12.dp))
+            .padding(all = 16.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            Row {
+
+            }
+            Text("Test")
+        }
+    }
+}
+
 @Preview
 @Composable
 fun SearchableStudyListView() {
     MiniChallengesMayTwentyFiveTheme {
         SearchableStudyList()
+    }
+}
+
+@Preview
+@Composable
+fun SearchableStudyItemView() {
+    MiniChallengesMayTwentyFiveTheme {
+        SearchableStudyItem()
     }
 }
