@@ -12,6 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.minichallengesmaytwentyfive.dailywordcard.DailyWordCard
+import com.example.minichallengesmaytwentyfive.searchablestudylist.SearchableStudyItemView
+import com.example.minichallengesmaytwentyfive.searchablestudylist.SearchableStudyList
 import com.example.minichallengesmaytwentyfive.ui.theme.MiniChallengesMayTwentyFiveTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,7 +22,11 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MiniChallengesMayTwentyFiveTheme {
-                DailyWordCard()
+//                Challenge 1
+//                DailyWordCard()
+
+//                Challenge 2
+                SearchableStudyList()
             }
         }
     }
