@@ -10,10 +10,12 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -101,7 +103,9 @@ fun SearchableStudyList() {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 4.dp, start = 20.dp, bottom = 12.dp, end = 20.dp)
+                    .padding(WindowInsets.statusBars.asPaddingValues())
+                    .padding(top = 4.dp, start = 20.dp, bottom = 12.dp, end = 20.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 Text(
                     text = "Study Topics",
@@ -118,24 +122,25 @@ fun SearchableStudyList() {
                             },
                             expanded = false,
                             onExpandedChange = {  },
-                            modifier = Modifier
-                                .height(48.dp),
+//                            modifier = Modifier
+//                                .height(48.dp),
                             placeholder = { Text("Search") }
                         )
                     },
                     expanded = false,
                     onExpandedChange = { },
                     modifier = Modifier
-                        .fillMaxWidth()
+                        .fillMaxWidth(),
+                    windowInsets = WindowInsets(0, 0, 0, 0)
                 ) {}
             }
         },
-        contentWindowInsets = WindowInsets(0, 0, 0, 0)
+//        contentWindowInsets = WindowInsets(0, 0, 0, 0)
     ) { padding ->
         Box(
             modifier = Modifier
-                .fillMaxSize()
                 .padding(padding)
+                .fillMaxSize()
                 .background(
                     brush = Brush.verticalGradient(
                         colors = listOf(
