@@ -12,6 +12,10 @@ val Montserrat = FontFamily(
     Font(
         resId = R.font.montserrat_regular,
         weight = FontWeight.Normal
+    ),
+    Font(
+        resId = R.font.montserrat_semi_bold,
+        weight = FontWeight.SemiBold
     )
 )
 
@@ -27,6 +31,18 @@ val Typography = Typography(
         fontFamily = Montserrat,
         fontWeight = FontWeight.Normal,
         fontSize = 19.sp,
+        lineHeight = 24.sp
+    ),
+    headlineSmall = TextStyle(
+        fontFamily = Montserrat,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 22.sp,
+        lineHeight = 32.sp
+    ),
+    labelSmall = TextStyle(
+        fontFamily = Montserrat,
+        fontWeight = FontWeight.Normal,
+        fontSize = 17.sp,
         lineHeight = 24.sp
     ),
     titleLarge = TextStyle(
