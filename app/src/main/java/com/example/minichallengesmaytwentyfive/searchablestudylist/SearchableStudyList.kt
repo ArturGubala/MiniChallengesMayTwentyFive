@@ -2,6 +2,7 @@
 
 package com.example.minichallengesmaytwentyfive.searchablestudylist
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -35,6 +36,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.res.painterResource
+import com.example.minichallengesmaytwentyfive.R
 import com.example.minichallengesmaytwentyfive.ui.theme.GreenPillBg
 import com.example.minichallengesmaytwentyfive.ui.theme.GreenPillText
 import com.example.minichallengesmaytwentyfive.ui.theme.MiniChallengesMayTwentyFiveTheme
@@ -76,7 +80,7 @@ val topicStyles = mapOf(
     "Literature" to TopicStyle(backgroundColor = PinkPillBg, textColor = PinkPillText),
     "Language Arts" to TopicStyle(backgroundColor = PurplePillBg, textColor = PurplePillText),
     "Geography" to TopicStyle(backgroundColor = OrangePillBg, textColor = OrangePillText),
-    "Language" to TopicStyle(backgroundColor = OrangePillBg, textColor = OrangePillBg),
+    "Language" to TopicStyle(backgroundColor = OrangePillBg, textColor = OrangePillText),
     "French" to TopicStyle(backgroundColor = PurplePillBg, textColor = PurplePillText),
     "Health" to TopicStyle(backgroundColor = PurplePillBg, textColor = PurplePillText),
     "Archaeology" to TopicStyle(backgroundColor = PurplePillBg, textColor = PurplePillText),
@@ -104,14 +108,16 @@ fun SearchableStudyList() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(WindowInsets.statusBars.asPaddingValues())
-                    .padding(top = 4.dp, start = 20.dp, bottom = 12.dp, end = 20.dp),
+                    .padding(top = 12.dp, start = 20.dp, bottom = 12.dp, end = 20.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 Text(
                     text = "Study Topics",
                     modifier = Modifier
                         .fillMaxWidth(),
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.headlineSmall,
+
                 )
                 SearchBar(
                     inputField = {
@@ -124,7 +130,18 @@ fun SearchableStudyList() {
                             onExpandedChange = {  },
 //                            modifier = Modifier
 //                                .height(48.dp),
-                            placeholder = { Text("Search") }
+                            placeholder = {
+                                Text(
+                                    text = "Search by topic or subject",
+                                    style = MaterialTheme.typography.labelSmall,
+                                )
+                            },
+                            leadingIcon = {
+                                Image(
+                                    painter = painterResource(R.drawable.ic_search),
+                                    contentDescription = null
+                                )
+                            }
                         )
                     },
                     expanded = false,
