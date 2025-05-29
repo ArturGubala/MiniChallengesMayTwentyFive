@@ -37,6 +37,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.painterResource
 import com.example.minichallengesmaytwentyfive.R
 import com.example.minichallengesmaytwentyfive.ui.theme.GreenPillBg
@@ -48,6 +53,7 @@ import com.example.minichallengesmaytwentyfive.ui.theme.PinkPillBg
 import com.example.minichallengesmaytwentyfive.ui.theme.PinkPillText
 import com.example.minichallengesmaytwentyfive.ui.theme.PurplePillBg
 import com.example.minichallengesmaytwentyfive.ui.theme.PurplePillText
+import kotlinx.coroutines.delay
 
 val topics = listOf(
     Topic("Photosynthesis", listOf("Biology", "Environmental Science")),
@@ -101,6 +107,20 @@ val topicStyles = mapOf(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchableStudyList() {
+    var query by remember { mutableStateOf("") }
+    var debouncedQuery by remember { mutableStateOf("") }
+
+    LaunchedEffect(query) {
+        delay(300)
+        debouncedQuery = query
+    }
+
+    val filteredTopics = remember(debouncedQuery) {
+        topics.filter {
+            it.topic.contains(debouncedQuery, ignoreCase = true) ||
+            it.subjectTags.any { tag -> tag.contains(debouncedQuery, ignoreCase = true) }
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -122,14 +142,12 @@ fun SearchableStudyList() {
                 SearchBar(
                     inputField = {
                         SearchBarDefaults.InputField(
-                            query = "",
-                            onQueryChange = { },
+                            query = query,
+                            onQueryChange = { query = it },
                             onSearch = {
                             },
                             expanded = false,
                             onExpandedChange = {  },
-//                            modifier = Modifier
-//                                .height(48.dp),
                             placeholder = {
                                 Text(
                                     text = "Search by topic or subject",
@@ -151,8 +169,7 @@ fun SearchableStudyList() {
                     windowInsets = WindowInsets(0, 0, 0, 0)
                 ) {}
             }
-        },
-//        contentWindowInsets = WindowInsets(0, 0, 0, 0)
+        }
     ) { padding ->
         Box(
             modifier = Modifier
@@ -168,23 +185,14 @@ fun SearchableStudyList() {
                     )
                 )
         ) {
-//            Column(
-//                modifier = Modifier
-//                    .fillMaxSize()
-//                    .padding(padding),
-//                verticalArrangement = Arrangement.spacedBy(40.dp, Alignment.CenterVertically),
-//                horizontalAlignment = Alignment.CenterHorizontally
-//            ) {
-//
-//            }
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(start = 20.dp, top = 20.dp, end = 20.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
+                verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.Top),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                items(topics) { topic ->
+                items(filteredTopics) { topic ->
                     SearchableStudyItem(topic)
                 }
             }
